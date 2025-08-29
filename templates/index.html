@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}TempLink Nexus · Generate Expiring Links{% endblock %}
+{% block content %}
+<div class="mx-auto max-w-xl">
+  <div class="glass p-8 rounded-3xl shadow-2xl">
+    <div class="flex items-center justify-between mb-6">
+      <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight">
+        <span class="neon">TempLink Nexus</span>
+      </h1>
+      <div class="text-xs uppercase tracking-widest opacity-70">v1.0</div>
+    </div>
+    <p class="mb-6 text-slate-300">Create a <span class="text-cyan-400 font-semibold">temporary</span> URL that auto-expires after the duration you choose.</p>
+
+    {% if error %}
+      <div class="mb-6 p-3 rounded-xl border border-red-500/40 bg-red-500/10 text-red-200 backdrop-blur">
+        ⚠ {{ error }}
+      </div>
+    {% endif %}
+
+    <form method="post" class="space-y-4">
+      <div>
+        <label class="block mb-2 text-sm text-slate-300">Original URL</label>
+        <input type="url" name="link" value="{{ old_link or '' }}" placeholder="https://example.com/page"
+               class="w-full p-4 rounded-2xl bg-slate-900/60 ring-1 ring-slate-700 focus:ring-2 focus:ring-cyan-400 outline-none transition" required>
+      </div>
+      <div>
+        <label class="block mb-2 text-sm text-slate-300">Expiry (minutes)</label>
+        <input type="number" name="duration" min="1" max="20160" placeholder="e.g., 30"
+               class="w-full p-4 rounded-2xl bg-slate-900/60 ring-1 ring-slate-700 focus:ring-2 focus:ring-cyan-400 outline-none transition" required>
+      </div>
+      <button type="submit" class="btn-primary w-full">Generate Temporary Link</button>
+    </form>
+
+    <div class="mt-8 text-xs text-slate-400">
+      Tip: links can live from 1 minute up to 14 days. Keep it short for maximum security.
+    </div>
+  </div>
+</div>
+{% endblock %}

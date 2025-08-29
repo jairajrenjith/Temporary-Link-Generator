@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Link Expired{% endblock %}
+{% block content %}
+<div class="mx-auto max-w-xl">
+  <div class="glass p-8 rounded-3xl shadow-2xl border border-red-500/40">
+    <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-4 text-red-300">
+      ⛔ Link Unavailable
+    </h1>
+    <p class="text-slate-300 mb-2">This temporary link is no longer active.</p>
+    {% if reason %}<p class="text-slate-400 text-sm mb-6">{{ reason }}</p>{% endif %}
+    <a href="/" class="btn-ghost">Generate a new link</a>
+  </div>
+</div>
+{% endblock %}

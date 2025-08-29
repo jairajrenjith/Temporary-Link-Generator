@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Your Temporary Link{% endblock %}
+{% block content %}
+<div class="mx-auto max-w-xl">
+  <div class="glass p-8 rounded-3xl shadow-2xl">
+    <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-4">
+      <span class="neon">Link Generated</span>
+    </h1>
+    <p class="text-slate-300 mb-6">Share the link below. It will auto-expire in <span class="text-cyan-400 font-semibold">{{ duration }}</span> minute(s).</p>
+
+    <div class="flex items-center gap-2 mb-4">
+      <input id="temp-link" type="text" readonly value="{{ temp_link }}" class="flex-1 p-4 rounded-2xl bg-slate-900/60 ring-1 ring-slate-700">
+      <button class="btn-secondary" onclick="copyTempLink()">Copy</button>
+    </div>
+
+    <div class="countdown text-sm text-slate-400 mb-6">
+      <span id="countdown"></span>
+    </div>
+
+    <div class="qr-wrapper">
+      <canvas id="qr"></canvas>
+    </div>
+
+    <div class="mt-8">
+      <a href="/" class="btn-ghost">Create another</a>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block body_extra %}
+<script>
+  startCountdown({{ duration }});
+  renderQR(document.getElementById('temp-link').value);
+</script>
+{% endblock %}
